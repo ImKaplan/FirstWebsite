@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>FREE PORN</title>
+
+<style>
+
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("what i goon to.png");
+    user-select: none; /* prevent text selection */
+  }
+  .drag {
+    width: 100px;
+    height: 100px;
+    background: #7c3aed;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    cursor: grab;
+    position: absolute;
+  }
+  .drag:active {
+    cursor: grabbing;
+  }
+
+  /* second block with different color just for clarity */
+  #drag2 {
+    background: #059669;
+  }
+</style>
+</head>
+
+<div style="font-size:xxx-large; align-self:first baseline;">FURRY PORN</div>
+
+<body>
+  <div id="drag1" class="drag" style="left:40%;top:40%;">Box 1</div>
+  <div id="drag2" class="drag" style="left:55%;top:55%;">Box 2</div>
+  <div id="drag3" class="drag" style="left:20%;top:55%;">Box 3</div>
+
+<script>
+let activeEl = null, offsetX = 0, offsetY = 0;
+
+function startDrag(e, el) {
+  activeEl = el;
+  const rect = el.getBoundingClientRect();
+  const clientX = e.clientX ?? e.touches[0].clientX;
+  const clientY = e.clientY ?? e.touches[0].clientY;
+  offsetX = clientX - rect.left;
+  offsetY = clientY - rect.top;
+}
+
+function moveDrag(e) {
+  if (!activeEl) return;
+
+  const clientX = e.clientX ?? e.touches[0].clientX;
+  const clientY = e.clientY ?? e.touches[0].clientY;
+
+  const elWidth = activeEl.offsetWidth;
+  const elHeight = activeEl.offsetHeight;
+  const maxX = window.innerWidth - elWidth;
+  const maxY = window.innerHeight - elHeight;
+
+  let newX = clientX - offsetX;
+  let newY = clientY - offsetY;
+
+  // Clamp values so the box stays in the viewport
+  newX = Math.max(0, Math.min(newX, maxX));
+  newY = Math.max(0, Math.min(newY, maxY));
+
+  activeEl.style.left = newX + 'px';
+  activeEl.style.top = newY + 'px';
+}
+
+function endDrag() {
+  activeEl = null;
+}
+
+// Attach listeners
+document.querySelectorAll('.drag').forEach(el => {
+  el.addEventListener('mousedown', e => startDrag(e, el));
+  el.addEventListener('touchstart', e => startDrag(e, el));
+});
+
+document.addEventListener('mousemove', moveDrag);
+document.addEventListener('touchmove', moveDrag);
+
+document.addEventListener('mouseup', endDrag);
+document.addEventListener('touchend', endDrag);
+</script>
+</body>
+
+</html>
